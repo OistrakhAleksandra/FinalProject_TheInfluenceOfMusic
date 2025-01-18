@@ -32,7 +32,7 @@
 			"archive": true,
 			"**/egg-info": true,
 		},
-		"python.defaultInterpreterPath": "venv\\Scripts\\python.exe",
+		"python.defaultInterpreterPath": "C:\\Users\\Home\\Desktop\\Studies\\Phyton\\projects 2024-2025\\Project_2\\venv\\Scripts\\python.exe",
 		"python.terminal.activateEnvironment": true,
 		"editor.defaultFormatter": "charliermarsh.ruff",
 		"editor.formatOnSave": true,
