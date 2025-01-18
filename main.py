@@ -1,4 +1,4 @@
-from data_filter import filter_to_new_excel  # Import the function
+from functions.cleaning_data import filter_to_new_excel  # Import the function
 
 # Define folder path and selected columns
 folder_path = r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Project_2\data\trial_data"
