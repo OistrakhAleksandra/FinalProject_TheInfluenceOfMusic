@@ -5,11 +5,11 @@ import pandas as pd
 
 
 # Function to convert CSV and Excel files to a single Excel file with selected columns
-def filter_to_new_excel(folder_path: str, selected_columns: list[str], final_folder_path: str) -> None:
+def filter_to_new_excel(folder_path: str, selected_columns: list[str], final_data_path: str) -> None:
     # Create an empty DataFrame to store the combined data
     combined_data = pd.DataFrame()
 
-    for file_name in os.listdir(folder_path):  # Loop through all files in the folder
+    for index, file_name in enumerate(os.listdir(folder_path), start=1):  # Loop through all files in the folder
         # Check if the file is a CSV or Excel file
         if file_name.endswith((".csv", ".xlsx")):
             file_path = os.path.join(folder_path, file_name)
@@ -23,7 +23,10 @@ def filter_to_new_excel(folder_path: str, selected_columns: list[str], final_fol
             # Check if the file contains all the required columns
             if all(col in data.columns for col in selected_columns):
                 # Select only the required columns
-                data_filtered = data[selected_columns]
+                data_filtered = data.loc[:, selected_columns].copy()  # Explicitly make a copy of the slice
+
+                # Add a column to indicate the file number or file name
+                data_filtered.loc[:, "Source File"] = f"{index}"
 
                 # Append the data to the combined DataFrame
                 combined_data = pd.concat([combined_data, data_filtered], ignore_index=True)
@@ -31,7 +34,10 @@ def filter_to_new_excel(folder_path: str, selected_columns: list[str], final_fol
                 print(f"File {file_name} is missing one or more required columns: {selected_columns}")
 
     # Path to save the final combined Excel file
-    # output_path = os.path.join(final_folder_path, "combined_data.xlsx")
-    output_path = Path(final_folder_path) / "combined_data.xlsx"
-    # Save the combined data to a new Excel file
-    combined_data.to_excel(output_path, index=False)
+    output_path = Path(final_data_path) / "combined_data_trial.xlsx"
+
+    # Remove all rows where there is at least one NaN (missing value) in any column
+    df_cleaned = combined_data.dropna()  # dropna removes rows with NaN values
+
+    # Save the cleaned data back to the same file
+    df_cleaned.to_excel(output_path, index=False)
