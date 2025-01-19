@@ -1,30 +1,30 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
+# Define the file path
+file_path = r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Project_2\data\trial_mean_values.xlsx"
 
-def plot_avg_rt_by_music_type(trial_combined_path: str) -> None:
-    """Функция для построения графика среднего времени реакции (RT) для каждого участника по типу музыки.
+# Read the Excel file
+data = pd.read_excel(file_path)
 
-    Параметры:
-    file_path (str): Путь к Excel файлу, содержащему данные с колонками 'music type', 'id participant', и 'RT'.
-    """
-    # Шаг 1: Чтение данных из Excel файла
-    df = pd.read_excel(trial_combined_path)
+# Ensure the required columns are present
+required_columns = ["participant_id", "music_type", "RT"]
+if not all(col in data.columns for col in required_columns):
+    raise ValueError(f"The input file must contain the following columns: {required_columns}")
 
-    # Шаг 2: Группировка данных по участникам и типам музыки
-    # Для каждого участника для каждого типа музыки вычисляем среднее значение RT
-    grouped = df.groupby(["participant_id", "music_type"])["RT"].mean().unstack()
+# Plot the data
+plt.figure(figsize=(10, 6))
+for music_type in data["music_type"].unique():
+    music_data = data[data["music_type"] == music_type]
+    plt.plot(music_data["participant_id"], music_data["RT"], label=music_type)
 
-    # Шаг 3: Построение графика
-    # Для каждого участника выводим 3 значения RT (для каждого типа музыки)
-    grouped.plot(kind="bar", figsize=(10, 6))
+plt.xlabel("Participant ID")
+plt.ylabel("Average RT")
+plt.title("Average RT for Each Music Type")
+plt.legend(title="Music Type")
+plt.grid(True)
+plt.xticks(rotation=45)
+plt.tight_layout()
 
-    # Добавляем подписи и заголовок
-    plt.title("Среднее время реакции по участникам и типам музыки")
-    plt.xlabel("ID участника")
-    plt.ylabel("Среднее время реакции (RT)")
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-
-    # Шаг 4: Отображаем график
-    plt.show()
+# Ensure the graph is displayed
+plt.show()
