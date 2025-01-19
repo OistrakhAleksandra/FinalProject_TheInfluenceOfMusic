@@ -1,3 +1,5 @@
+"""Import necessary libraries for file handling and data processing"""
+
 import os
 from pathlib import Path
 
@@ -26,7 +28,7 @@ def filter_to_new_excel(folder_path: str, selected_columns: list[str], final_dat
                 data_filtered = data.loc[:, selected_columns].copy()  # Explicitly make a copy of the slice
 
                 # Add a column to indicate the file number or file name
-                data_filtered.loc[:, "Source File"] = f"{index}"
+                data_filtered.loc[:, "participant_id"] = f"{index}"
 
                 # Append the data to the combined DataFrame
                 combined_data = pd.concat([combined_data, data_filtered], ignore_index=True)
