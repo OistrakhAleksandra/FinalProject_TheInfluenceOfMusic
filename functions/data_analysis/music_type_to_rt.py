@@ -1,8 +1,10 @@
+"""Import necessary libraries for file handling and data processing"""
+
 import matplotlib.pyplot as plt
 import pandas as pd
 
 # Define the file path
-file_path = r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Project_2\data\trial_mean_values.xlsx"
+file_path = r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Project_2\data\combined_data_trial.xlsx"
 
 # Read the Excel file
 data = pd.read_excel(file_path)
