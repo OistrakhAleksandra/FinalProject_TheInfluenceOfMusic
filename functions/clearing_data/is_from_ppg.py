@@ -23,7 +23,6 @@ def process_ppg_and_trial_data_to_excel(input_folder=str, folder_path=str, trial
     def calculate_heartbeats(ppg, start_time, end_time):
         # Filter PPG data within the time interval
         interval_data = ppg[(ppg["time"] >= start_time) & (ppg["time"] <= end_time)]
-        print(f"Calculating heartbeats between {start_time} and {end_time}, found {len(interval_data)} data points.")
         # Detect peaks (heartbeats) in the PPG signal
         peaks, _ = find_peaks(interval_data["PPG"], height=0)  # Adjust height threshold as needed
         return len(peaks)
@@ -66,7 +65,6 @@ def process_ppg_and_trial_data_to_excel(input_folder=str, folder_path=str, trial
 
             # Extract subject ID from the file name
             subject_id = trial_file.split("_")[0]
-            print(f"Processing trial data for subject {subject_id}...")
 
             # Create a list to store this participant's data
             participant_data = []
@@ -89,11 +87,9 @@ def process_ppg_and_trial_data_to_excel(input_folder=str, folder_path=str, trial
                 # Loop through trial rows to calculate IA
                 for index, row in trial_data.iterrows():
                     # Debugging output to check session and time matching
-                    print(f"Checking row {index} for session {session}...")
                     if row["session"] == session:
                         start_time = row["PPG_response_start"]
                         end_time = row["PPG_ITI_start"]
-                        print(f"Start time: {start_time}, End time: {end_time}")
 
                         # Calculate recorded heartbeats
                         nbeatrecorded = calculate_heartbeats(ppg_data, start_time, end_time)
@@ -132,9 +128,7 @@ def process_ppg_and_trial_data_to_excel(input_folder=str, folder_path=str, trial
                         )
 
             # Check if participant data has been added
-            if participant_data:
-                print(f"Adding data for participant {subject_id}, session {session}: {len(participant_data)} rows")
-            else:
+            if not participant_data:
                 print(f"No data for participant {subject_id}, session {session}")
 
             # Append participant data to the overall list
@@ -147,12 +141,9 @@ def process_ppg_and_trial_data_to_excel(input_folder=str, folder_path=str, trial
                 # Write the summary sheet only if it doesn't already exist
                 if "Summary" not in existing_sheets:
                     all_data_df.to_excel(writer, sheet_name="Summary", index=False)
-                    print("Summary sheet written.")
                 else:
                     print("Summary sheet already exists. Skipping write.")
 
             # Save existing data to the writer (preserve original sheets)
             for sheet, data in existing_data.items():
                 data.to_excel(writer, sheet_name=sheet, index=False)
-
-    print(f"Consolidated data saved to {trial_combined_path}")

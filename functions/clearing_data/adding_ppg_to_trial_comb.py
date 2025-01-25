@@ -82,9 +82,7 @@ def match_ppg_data(trial_combined_path: str, input_folder: str) -> None:
                 print(f"Unexpected error processing file {matched_file}: {e!s}")
 
         else:
-            warning_message = f"PPG file not found for participant {participant_id}, session {session}. Skipping."
-            print(warning_message)
-
+            pass
     # Save the updated Excel file
     try:
         trial_data.to_excel(trial_combined_path, index=False)
