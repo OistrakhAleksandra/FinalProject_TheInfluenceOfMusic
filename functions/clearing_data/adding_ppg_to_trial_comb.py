@@ -1,5 +1,3 @@
-"""Import necessary libraries for file handling and data processing"""
-
 import os
 import re
 from pathlib import Path
@@ -71,8 +69,16 @@ def match_ppg_data(trial_combined_path: str, input_folder: str) -> None:
                 # Extract the PPG value corresponding to the closest time
                 ppg_value = closest_time_row["PPG"]
 
-                # Add the PPG value to the new column
-                trial_data.loc[index, "PPG_data"] = ppg_value  # Using .loc for assignment
+                # Ensure PPG value is a number and within the expected range [-1, 1]
+                try:
+                    ppg_value = float(ppg_value)  # Try to convert to float
+                    if -2 <= ppg_value <= 2:
+                        trial_data.loc[index, "PPG_data"] = ppg_value  # Using .loc for assignment
+                    else:
+                        trial_data.loc[index, "PPG_data"] = None  # Set to None if outside range
+                except (ValueError, TypeError):
+                    print(f"Invalid PPG value {ppg_value} for {matched_file}. Deleting.")
+                    trial_data.loc[index, "PPG_data"] = None  # Set to None if it's not a valid number
 
             except ValueError as e:
                 print(f"Error: {e}")  # Print specific error message for missing columns
@@ -86,7 +92,7 @@ def match_ppg_data(trial_combined_path: str, input_folder: str) -> None:
     # Save the updated Excel file
     try:
         trial_data.to_excel(trial_combined_path, index=False)
-        print(f"Updated file saved at: {trial_combined_path}")
+        print("PPG is added to the final excel")
     except PermissionError as e:
         print(f"Error saving the updated file due to permission issue: {e!s}")
     except Exception as e:

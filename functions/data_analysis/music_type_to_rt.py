@@ -1,15 +1,18 @@
-"""Import necessary libraries for file handling and data processing"""
+import logging
 
 import matplotlib.pyplot as plt
 import pandas as pd
 from scipy.stats import f_oneway
 
+# Configure logging
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
-def analyze_rt_by_music_type(trial_combined_path):
+
+def analyze_rt_by_music_type(trial_combined_path: str) -> str:
     """Analyzes reaction time (RT) differences between music types and performs ANOVA.
 
     Parameters:
-        file_path (str): Path to the Excel file containing the data.
+        trial_combined_path (str): Path to the Excel file containing the data.
 
     Returns:
         str: Conclusion based on the ANOVA test result.
@@ -28,7 +31,7 @@ def analyze_rt_by_music_type(trial_combined_path):
     discord = data[data["music_type"] == "discord"]["RT"]
 
     f_stat, p_value = f_oneway(tonal, atonal, discord)
-    print(f"ANOVA F-statistic: {f_stat:.2f}, p-value: {p_value:.4f}")
+    logging.info(f"ANOVA F-statistic: {f_stat:.2f}, p-value: {p_value:.4f}")
 
     # Interpret the results
     if p_value < 0.05:

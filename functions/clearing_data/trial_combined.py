@@ -32,11 +32,13 @@ def filter_to_new_excel(folder_path: str, selected_columns: list[str], final_dat
 
                 # Append the data to the combined DataFrame
                 combined_data = pd.concat([combined_data, data_filtered], ignore_index=True)
+
             else:
                 print(f"File {file_name} is missing one or more required columns: {selected_columns}")
 
     # Path to save the final combined Excel file
     output_path = Path(final_data_path) / "combined_data_trial.xlsx"
+    print("Data from trial_data folder is added to the final excel")
 
     # Remove all rows where there is at least one NaN (missing value) in any column
     df_cleaned = combined_data.dropna()  # dropna removes rows with NaN values

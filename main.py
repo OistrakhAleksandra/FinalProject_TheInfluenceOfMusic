@@ -4,13 +4,18 @@ It uses the combine_ppg_averages function to calculate PPG averages and the filt
 to filter the trial data based on selected columns.
 """
 
-# Import the functions
+# Import the functions for clearing data
 from functions.clearing_data.adding_ppg_to_trial_comb import match_ppg_data
-from functions.clearing_data.is_from_ppg import process_ppg_and_trial_data_to_excel
+from functions.clearing_data.is_to_excel import calculate_is
 from functions.clearing_data.trial_combined import filter_to_new_excel
-from functions.data_analysis.ai_to_music_type import analyze_music_type_vs_IS
-from functions.data_analysis.music_type_to_rt import analyze_rt_by_music_type
 
+# Import the functions for data analyze
+
+
+output_path = r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Final_project\data\combined_data_trial.xlsx"
+
+# Path to data folder
+base_path = r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Final_project\data"
 # Path to the folder with trial data
 folder_path = r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Final_project\data\trial_data"
 # Path to the folder with PPG file
@@ -29,6 +34,4 @@ trial_combined_path = (
 # Call the function from functions.py
 filter_to_new_excel(folder_path, selected_columns, final_data_path)
 match_ppg_data(trial_combined_path, input_folder)
-process_ppg_and_trial_data_to_excel(input_folder, folder_path, trial_combined_path)
-analyze_rt_by_music_type(trial_combined_path)
-analyze_music_type_vs_IS(trial_combined_path)
+calculate_is(base_path, trial_combined_path)  # analyze_music_type_vs_IS(trial_combined_path)

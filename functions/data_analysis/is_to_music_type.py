@@ -5,7 +5,7 @@ import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
 
-def analyze_music_type_vs_IS(trial_combined_path=str):
+def analyze_music_type_vs_IS(trial_combined_path=str) -> None:
     """Analyze the relationship between 'music_type' and 'IS'.
 
     Parameters:
