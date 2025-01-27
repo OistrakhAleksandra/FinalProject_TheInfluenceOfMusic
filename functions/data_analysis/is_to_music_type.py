@@ -5,7 +5,7 @@ import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
 
-def analyze_music_type_vs_IS(trial_combined_path=str) -> None:
+def analyze_music_type_vs_IS(combined_data_file=str) -> None:
     """Analyze the relationship between 'music_type' and 'IS'.
 
     Parameters:
@@ -15,7 +15,7 @@ def analyze_music_type_vs_IS(trial_combined_path=str) -> None:
         tuple: Correlation value and ANOVA table.
     """
     # Reading the file
-    df = pd.read_excel(trial_combined_path)
+    df = pd.read_excel(combined_data_file)
 
     # 1. Correlation between 'music_type' and 'IS'
     df["music_type_numeric"] = df["music_type"].astype("category").cat.codes  # Convert music_type to numeric

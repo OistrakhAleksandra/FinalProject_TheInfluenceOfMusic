@@ -8,7 +8,7 @@ from scipy.stats import f_oneway
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 
-def analyze_rt_by_music_type(trial_combined_path: str) -> str:
+def analyze_rt_by_music_type(combined_data_file: str) -> str:
     """Analyzes reaction time (RT) differences between music types and performs ANOVA.
 
     Parameters:
@@ -18,7 +18,7 @@ def analyze_rt_by_music_type(trial_combined_path: str) -> str:
         str: Conclusion based on the ANOVA test result.
     """
     # Read the Excel file
-    data = pd.read_excel(trial_combined_path)
+    data = pd.read_excel(combined_data_file)
 
     # Ensure the required columns are present
     required_columns = ["participant_id", "music_type", "RT"]

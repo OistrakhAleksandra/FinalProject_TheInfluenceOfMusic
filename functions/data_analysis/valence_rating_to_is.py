@@ -4,22 +4,20 @@ import seaborn as sns
 from scipy.stats import linregress
 
 
-def plot_valence_vs_interoception(file_path):
+def plot_valence_vs_interoception(combined_data_file):
     """Plots the relationship between average valence rating and interoceptive sensitivity (IS).
 
     Parameters:
-        file_path (str): Path to the Excel file.
-        sheet_name (str): Name of the sheet containing the data.
+        file_path (str): Path to the Excel file containing the data.
 
     Returns:
         None
     """
-    # Load data
-    data = pd.ExcelFile(file_path)
-    sheet_data = data.parse(sheet_name)
+    # Load data (no need for sheet_name)
+    data = pd.read_excel(combined_data_file)
 
     # Group by participant_id to calculate the average valence_rating and IS for each participant
-    grouped_data = sheet_data.groupby("participant_id").agg({"valence_rating": "mean", "IS": "mean"}).reset_index()
+    grouped_data = data.groupby("participant_id").agg({"valence_rating": "mean", "IS": "mean"}).reset_index()
 
     # Perform linear regression
     slope, intercept, r_value, p_value, std_err = linregress(grouped_data["IS"], grouped_data["valence_rating"])

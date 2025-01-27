@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Define the file path
-file_path = r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Project_2\data\combined_data_trial.xlsx"
+combined_data_file = r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Project_2\data\combined_data_trial.xlsx"
 
 # Read the Excel file
-data = pd.read_excel(file_path)
+data = pd.read_excel(combined_data_file)
 
 # Ensure the required columns are present
 required_columns = ["participant_id", "music_type", "PPG_data"]

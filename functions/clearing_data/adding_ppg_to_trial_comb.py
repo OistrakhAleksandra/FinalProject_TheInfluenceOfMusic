@@ -5,18 +5,18 @@ from pathlib import Path
 import pandas as pd
 
 
-def match_ppg_data(trial_combined_path: str, input_folder: str) -> None:
+def match_ppg_data(combined_data_file: str, PPG_data_path: str) -> None:
     """This function matches PPG data to the trial data by comparing participant IDs and session numbers.
 
     Args:
-    trial_combined_path (str): Path to the Excel file containing trial data.
+    combined_data_file (str): Path to the Excel file containing combined data.
     input_folder (str): Path to the folder containing the PPG CSV files.
 
     Raises:
     ValueError: If the required columns are not found in the trial data.
     """
     # Load the data from the Excel file
-    trial_data = pd.read_excel(trial_combined_path)
+    trial_data = pd.read_excel(combined_data_file)
 
     # Check if required columns exist in the DataFrame
     required_columns = ["session", "participant_id", "PPG_response_start"]
@@ -28,7 +28,7 @@ def match_ppg_data(trial_combined_path: str, input_folder: str) -> None:
     trial_data["PPG_data"] = None
 
     # Get all filenames in the input folder
-    available_files = os.listdir(input_folder)
+    available_files = os.listdir(PPG_data_path)
 
     # Compile a regular expression pattern to extract participant_id and session from file names
     pattern = re.compile(r"sub-(\d+)_sess(\d+)_PPG.csv")
@@ -53,7 +53,7 @@ def match_ppg_data(trial_combined_path: str, input_folder: str) -> None:
                     break
 
         if matched_file:
-            file_path = Path(input_folder) / matched_file  # Using Path with '/' operator
+            file_path = Path(PPG_data_path) / matched_file  # Using Path with '/' operator
 
             try:
                 ppg_data = pd.read_csv(file_path)
@@ -91,7 +91,7 @@ def match_ppg_data(trial_combined_path: str, input_folder: str) -> None:
             pass
     # Save the updated Excel file
     try:
-        trial_data.to_excel(trial_combined_path, index=False)
+        trial_data.to_excel(combined_data_file, index=False)
         print("PPG is added to the final excel")
     except PermissionError as e:
         print(f"Error saving the updated file due to permission issue: {e!s}")

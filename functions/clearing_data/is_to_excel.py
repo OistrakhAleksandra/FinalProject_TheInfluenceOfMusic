@@ -8,7 +8,7 @@ from scipy.optimize import curve_fit
 from scipy.signal import cheby2, filtfilt, find_peaks
 
 
-def calculate_is(base_path, trial_combined_path):
+def calculate_is(base_path, combined_data_file):
     """Calculate IS (Integration Score) and update the existing Excel file.
 
     Parameters:
@@ -74,10 +74,10 @@ def calculate_is(base_path, trial_combined_path):
     hbd_path = os.path.join(base_path, "HBD_data")
 
     # Load existing Excel file
-    if not os.path.exists(trial_combined_path):
+    if not os.path.exists(combined_data_file):
         print("File does not exist.")
         return
-    df = pd.read_excel(trial_combined_path)
+    df = pd.read_excel(combined_data_file)
     df["participant_id"] = df["participant_id"].astype(str)
 
     # Store results
@@ -127,5 +127,5 @@ def calculate_is(base_path, trial_combined_path):
     df["IS"] = df["participant_id"].map(results_df.set_index("participant_id")["Normalized IS"].to_dict())
 
     # Save updated Excel file
-    df.to_excel(trial_combined_path, index=False)
-    print(f"IS calculations have been added to {trial_combined_path}.")
+    df.to_excel(combined_data_file, index=False)
+    print("IS calculations have been added to the combined data file.")

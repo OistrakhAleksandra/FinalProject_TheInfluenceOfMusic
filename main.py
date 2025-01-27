@@ -12,26 +12,22 @@ from functions.clearing_data.trial_combined import filter_to_new_excel
 # Import the functions for data analyze
 
 
-output_path = r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Final_project\data\combined_data_trial.xlsx"
-
 # Path to data folder
 base_path = r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Final_project\data"
 # Path to the folder with trial data
-folder_path = r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Final_project\data\trial_data"
+trial_data_path = r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Final_project\data\trial_data"
 # Path to the folder with PPG file
-input_folder = r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Final_project\data\PPG_data"
-# Columns for combined_trial
-selected_columns = ["session", "music_type", "valence_rating", "RT", "PPG_response_start"]
+PPG_data_path = r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Final_project\data\PPG_data"
 # Path to the final data folder
 final_data_path = r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Final_project\data"
-# Columns for PPG_combined data
-needed_columns = ["valence_rating", "RT"]
 # Path to the trial_combined
-trial_combined_path = (
+combined_data_file = (
     r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Final_project\data\combined_data_trial.xlsx"
 )
+selected_columns = ["session", "music_type", "valence_rating", "RT", "PPG_response_start"]
+
 
 # Call the function from functions.py
-filter_to_new_excel(folder_path, selected_columns, final_data_path)
-match_ppg_data(trial_combined_path, input_folder)
-calculate_is(base_path, trial_combined_path)  # analyze_music_type_vs_IS(trial_combined_path)
+filter_to_new_excel(trial_data_path, selected_columns, final_data_path)
+match_ppg_data(combined_data_file, PPG_data_path)
+calculate_is(base_path, combined_data_file)  # analyze_music_type_vs_IS(trial_combined_path)

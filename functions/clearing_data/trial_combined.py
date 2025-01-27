@@ -7,14 +7,14 @@ import pandas as pd
 
 
 # Function to convert CSV and Excel files to a single Excel file with selected columns
-def filter_to_new_excel(folder_path: str, selected_columns: list[str], final_data_path: str) -> None:
+def filter_to_new_excel(trial_data_path: str, selected_columns: list[str], combined_data_file: str) -> None:
     # Create an empty DataFrame to store the combined data
     combined_data = pd.DataFrame()
 
-    for index, file_name in enumerate(os.listdir(folder_path), start=1):  # Loop through all files in the folder
+    for index, file_name in enumerate(os.listdir(trial_data_path), start=1):  # Loop through all files in the folder
         # Check if the file is a CSV or Excel file
         if file_name.endswith((".csv", ".xlsx")):
-            file_path = os.path.join(folder_path, file_name)
+            file_path = os.path.join(trial_data_path, file_name)
 
             # Read the data based on the file type
             if file_name.endswith(".csv"):
@@ -37,7 +37,7 @@ def filter_to_new_excel(folder_path: str, selected_columns: list[str], final_dat
                 print(f"File {file_name} is missing one or more required columns: {selected_columns}")
 
     # Path to save the final combined Excel file
-    output_path = Path(final_data_path) / "combined_data_trial.xlsx"
+    output_path = Path(combined_data_file) / "combined_data_trial.xlsx"
     print("Data from trial_data folder is added to the final excel")
 
     # Remove all rows where there is at least one NaN (missing value) in any column
@@ -45,3 +45,5 @@ def filter_to_new_excel(folder_path: str, selected_columns: list[str], final_dat
 
     # Save the cleaned data back to the same file
     df_cleaned.to_excel(output_path, index=False)
+
+    selected_columns = ["session", "music_type", "valence_rating", "RT", "PPG_response_start"]

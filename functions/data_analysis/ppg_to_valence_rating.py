@@ -2,9 +2,9 @@ import pandas as pd
 from scipy.stats import spearmanr
 
 
-def calculate_spearman_correlation(trial_combined_path=str) -> None:
+def calculate_spearman_correlation(combined_data_file=str) -> None:
     # Reading the excel file
-    data = pd.read_excel(trial_combined_path)
+    data = pd.read_excel(combined_data_file)
 
     # Clean column names (strip any extra spaces)
     data.columns = data.columns.str.strip()
