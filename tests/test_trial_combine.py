@@ -3,11 +3,6 @@ from unittest.mock import patch, MagicMock
 import pandas as pd
 
 
-import pytest
-from unittest.mock import patch, MagicMock
-import pandas as pd
-from pathlib import Path
-
 
 def test_filter_to_new_excel():
     """Test the filter_to_new_excel function without real file or folder operations."""

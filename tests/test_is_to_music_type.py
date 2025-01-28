@@ -1,6 +1,6 @@
 import pandas as pd
 import pytest
-from functions.data_analysis.IS_ti_music_type import analyze_music_type_vs_IS
+from functions.data_analysis.is_to_music_type import analyze_music_type_vs_IS
 
 def test_analyze_music_type_vs_IS():
     # Create a sample DataFrame
