@@ -109,5 +109,23 @@ The raw dataset includes the following key variables:
 
 1. **Install Dependencies:**
 
-   ```bash
-   pip install -r requirements.txt
+```bash
+# Install Virtualenv is - a tool to set up your Python environments
+pip install virtualenv
+
+# Create virtual environment (serve only this project):
+python -m venv venv
+
+# Activate virtual environment
+.\venv\Scripts\activate # For Windows
+source venv/bin/activate # For Mac/Linux
+**(venv) should appear as prefix to all command (run next command just after activating venv)**
+
+# Update venv's python package-installer (pip) to its latest version
+python.exe -m pip install --upgrade pip
+
+# Install projects packages (Everything needed to run the project)
+pip install -e .
+
+# Install dev packages (Additional packages for linting, testing and other developer tools)
+pip install -e .[dev]
