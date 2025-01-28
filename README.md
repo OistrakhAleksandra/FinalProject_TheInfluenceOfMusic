@@ -19,12 +19,16 @@ By combining trial data and PPG recordings, we investigate whether **music stimu
 ## **Data Processing Workflow**
 
 1. **Data Cleaning**  
-   - Combine all participant trial data into one Excel file.  
-   - Remove incorrect or missing values.  
+   - Calculate and combine participants trial data into one Excel file.
+   - Calculate Heartbeat from PPG data and combine it to additional excel file.
+   - Remove incorrect or missing values.
+   - Calculate Interoceptive sensitivity and recording it to the combined trial data excel.
 
 2. **Data Analysis**  
-   - Perform statistical tests (ANOVA, correlation).  
-   - Generate visualization graphs.  
+   - Perform statistical tests (ANOVA, pearson, correlation).  
+   - Generate visualization graphs.
+3. **Code tests**
+  Final code tests, code review.
 
 ---
 
