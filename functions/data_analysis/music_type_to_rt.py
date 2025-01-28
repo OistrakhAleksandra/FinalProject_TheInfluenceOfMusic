@@ -49,7 +49,7 @@ def analyze_rt_by_music_type(combined_data_file: str) -> str:
         summary_stats["mean"],
         yerr=summary_stats["std"],
         capsize=5,
-        color=["skyblue", "lightgreen", "salmon"],
+        color=["lightblue", "peachpuff", "lightpink"],
     )
 
     # Add labels, title, and grid

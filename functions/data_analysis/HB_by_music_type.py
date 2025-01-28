@@ -22,7 +22,7 @@ def plot_hr_by_music_type(R_peak_data_path, combined_data_file):
 
     # Plotting HR by music type
     plt.figure(figsize=(8, 6))
-    sns.boxplot(x="music_type", y="HR", data=merged_data)
+    sns.boxplot(x="music_type", y="HR", hue="music_type", palette="pastel", data=merged_data)
     plt.title("Heart Rate by Music Type", fontsize=14)
     plt.xlabel("Music Type", fontsize=12)
     plt.ylabel("Heart Rate (bpm)", fontsize=12)

@@ -15,7 +15,7 @@ def plot_valence_by_music_type(combined_data_file):
     data = pd.read_excel(combined_data_file)
 
     plt.figure(figsize=(8, 6))
-    sns.boxplot(x="music_type", y="valence_rating", data=data)
+    sns.boxplot(x="music_type", y="valence_rating", hue="music_type", palette="pastel", data=data)
 
     # ANOVA test to check if music type affects valence rating
     tonal = data[data["music_type"] == "tonal"]["valence_rating"]
