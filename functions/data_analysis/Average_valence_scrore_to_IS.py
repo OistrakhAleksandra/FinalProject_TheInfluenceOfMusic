@@ -52,10 +52,3 @@ def analyze_valence_vs_IS(combined_data_file: str):
         print("There is a significant correlation between mean valence score and IS.")
     else:
         print("There is no significant correlation between mean valence score and IS.")
-
-
-# Example usage
-combined_data_file = (
-    r"C:\Users\Home\Desktop\Studies\Phyton\projects 2024-2025\Final_project\data\combined_data_trial.xlsx"
-)
-analyze_valence_vs_IS(combined_data_file)

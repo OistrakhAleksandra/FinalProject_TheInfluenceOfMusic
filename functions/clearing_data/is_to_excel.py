@@ -5,7 +5,7 @@ import pandas as pd
 from scipy.optimize import curve_fit
 
 
-def calculate_is(HBD_data_path, combined_data_file):
+def calculate_is(HBD_data_path: str, combined_data_file: str):
     """Calculates Interoceptive Sensitivity (IS) for each participant using the Heartbeat Discrimination Test data
     and updates the combined Excel file.
 
@@ -25,8 +25,6 @@ def calculate_is(HBD_data_path, combined_data_file):
     hbd_files = [file for file in os.listdir(HBD_data_path) if file.endswith(".csv")]
 
     for file in hbd_files:
-        print(f"Processing file: {file}")
-
         # Extract participant ID from file name
         try:
             participant_id = int(file.split("_")[0].split("-")[1])
@@ -60,8 +58,8 @@ def calculate_is(HBD_data_path, combined_data_file):
             hbd_data[hbd_data["normalized_delay"] == delay]["response"].mean() for delay in normalized_delays
         ]
 
-        print(f"Normalized delays for participant {participant_id}: {normalized_delays}")
-        print(f"Sync ratios for participant {participant_id}: {sync_ratios}")
+        # print(f"Normalized delays for participant {participant_id}: {normalized_delays}")
+        # print(f"Sync ratios for participant {participant_id}: {sync_ratios}")
 
         # Skip if no valid sync_ratios or all values are identical
         if not sync_ratios or len(set(sync_ratios)) == 1:
@@ -77,7 +75,6 @@ def calculate_is(HBD_data_path, combined_data_file):
             )
             A, mu, sigma, b = popt
             IS_value = 1 - A if 0 < A < 1 else np.nan
-            print(f"Calculated IS for participant {participant_id}: {IS_value}")
         except RuntimeError:
             IS_value = np.nan
             print(f"Gaussian fitting failed for participant {participant_id}. Setting IS to NaN.")
@@ -87,4 +84,4 @@ def calculate_is(HBD_data_path, combined_data_file):
 
     # Save updated combined data
     combined_data.to_excel(combined_data_file, index=False)
-    print(f"Calculation complete. IS values have been added to {combined_data_file}.")
+    print("Calculation complete. IS values have been added to the combined_data_trial file.")

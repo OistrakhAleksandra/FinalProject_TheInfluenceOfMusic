@@ -37,4 +37,4 @@ def filter_to_new_excel(trial_data_path: str, selected_columns: list[str], combi
     # Save final dataset
     output_path = Path(combined_data_file) / "combined_data_trial.xlsx"
     df_cleaned.to_excel(output_path, index=False)
-    print(f"Final cleaned data saved to {output_path}.")
+    print("Trial data cleaned and added to the combined_data_trial file.")
