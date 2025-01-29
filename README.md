@@ -107,6 +107,8 @@ The raw dataset includes the following key variables:
 - **Valence Rating and IS:**  
   **Weak positive correlation** – people who reacted more emotionally to music **do not necessarily have a higher IS**.
 
+**For a full analysis, see the [Project Report](documentation/Project report.pdf)**.
+
 ---
 
 ## **How to Run the Project**
