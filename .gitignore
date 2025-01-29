@@ -11,3 +11,4 @@ dist
 .coverage
 **/*.egg-info
 **/__pycache__
+visualization.ipynb
