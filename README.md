@@ -136,4 +136,4 @@ pip install -e .
 # Install dev packages (Additional packages for linting, testing and other developer tools)
 pip install -e .[dev]
 
-Update all the pathes in the main code to your pathes.
+**Update all the pathes in the main code to your pathes.**
